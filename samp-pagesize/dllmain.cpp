@@ -2,7 +2,12 @@
 
 static void Thread()
 {
-	Pattern pattern(GetCurrentProcess(), GetModuleHandleA("samp.dll"));
+	HMODULE samp = GetModuleHandleA("samp.dll");
+
+	if (!samp)
+		return;
+
+	Pattern pattern(GetCurrentProcess(), samp);
 
 	DWORD offsets[3] = { NULL }, OldProtect = NULL;
 
